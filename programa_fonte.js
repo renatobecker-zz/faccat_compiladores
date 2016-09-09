@@ -1,22 +1,22 @@
-max = function(a) {
-    var m = a[0];
-    for (var i = 1; i < a.length; i++) {
-        writeln("m = "+m);
-	if (m < a[i]) m = a[i];
-    }
-    return m;
+function getType(data) {
+  return typeof data;
 }
 
-impar = function(v) {
-    if(v & 1){
-        writeln("Impar");
-    } else {
-        writeln("Par");
+function showUsers(users) {
+  for (let i = 0; i < users.length; i++) {
+    if (users[i] === 'Fernando') {
+      console.log(`Woahhh, you found it!`);
     }
+  }
 }
 
-a = random_list(6,1,10);
-writeln(a);
-max(a);
-impar(4);
-impar(5);
+function sum(a, b) {
+  let data = a + b;
+  return data;
+}
+
+let type = getType('disciplina de compiladores');
+
+console.log(type);
+
+showUsers(['Leonardo', 'Renato', 'Fernando', 'Delmar', 'Marcelo']);
