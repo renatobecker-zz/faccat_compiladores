@@ -19,6 +19,11 @@ rd.on('line', (line) => {
 });
 
 function getLineLabel(line) {
+  if (new RegExp(expressions.forloop).test(line)) {
+    console.log(`Line ${currentLine} - Estrutura de controle de repetição`);
+    return;
+  }
+
   if (new RegExp(expressions.function).test(line)) {
     let name = getFunctionName(line);
     console.log(`Line ${currentLine} - Declaração de função ${name}`);
@@ -34,10 +39,6 @@ function getLineLabel(line) {
 
   if (new RegExp(expressions.close).test(line)) {
     console.log(`Line ${currentLine} - Fechamento de bloco de código`);
-  }
-
-  if (new RegExp(expressions.forloop).test(line)) {
-    console.log(`Line ${currentLine} - Estrutura de controle de repetição`);
   }
 
   if (new RegExp(expressions.conditional).test(line)) {
