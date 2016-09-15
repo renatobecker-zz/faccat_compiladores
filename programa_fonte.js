@@ -15,8 +15,17 @@ function sum(a, b) {
   return data;
 }
 
+function ateParar(value) {
+  var i = 0;
+  while (i < value) {
+  	i++;
+  }
+  console.log('ateParar chegou em ' + value);
+}
+
 let type = getType('disciplina de compiladores');
 
 console.log(type);
 
 showUsers(['Leonardo', 'Renato', 'Fernando', 'Delmar', 'Marcelo']);
+ateParar(40);

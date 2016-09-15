@@ -6,6 +6,7 @@ let expressions = {
   assign: /[a-zA-Z]+ *[=] *[a-zA-Z0-9]+|[a-zA-Z]+ *[+]+[=] *[a-zA-Z0-9]+/g,
   close: /[}]/g, // TODO needs fix in order to work with ES6 template literals ``
   forloop: /for +\(([^()]*|\([^()]*\))*\)/g,
+  whileloop: /while +\(([^()]*|\([^()]*\))*\)/g,
   conditional: /if +\(([^()]*|\([^()]*\))*\)/g,
   functionCall: /([a-zA-Z0-9]+)\(([^()]*|\([^()]*\))*\)/g,
   return: 'return',
