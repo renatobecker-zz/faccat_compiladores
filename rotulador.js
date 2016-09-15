@@ -4,6 +4,7 @@ let fs = require('fs');
 let readline = require('readline');
 
 let expressions = require('./expressions');
+let messages = require('./messages');
 
 let currentLine = 1;
 
@@ -19,46 +20,19 @@ rd.on('line', (line) => {
 });
 
 function getLineLabel(line) {
-  if (new RegExp(expressions.forloop).test(line)) {
-    console.log(`Line ${currentLine} - Estrutura de controle de repetição`);
-    return;
+
+  for (var exp in expressions) {
+    var re = new RegExp(expressions[exp]);
+    if (re.test(line)) {
+      var name = (exp === 'function') ? getFunctionName(line) : '';
+      console.log('Line ' + currentLine + ' ' + messages[exp] + name);    
+    }  
   }
 
-  if (new RegExp(expressions.function).test(line)) {
-    let name = getFunctionName(line);
-    console.log(`Line ${currentLine} - Declaração de função ${name}`);
-  }
-
-  if (new RegExp(expressions.operators).test(line)) {
-    console.log(`Line ${currentLine} - Operação matemática`);
-  }
-
-  if (new RegExp(expressions.assign).test(line)) {
-    console.log(`Line ${currentLine} - Atribuição de valores a uma variável`);
-  }
-
-  if (new RegExp(expressions.close).test(line)) {
-    console.log(`Line ${currentLine} - Fechamento de bloco de código`);
-  }
-
-  if (new RegExp(expressions.conditional).test(line)) {
-    console.log(`Line ${currentLine} - Estrutura de controle condicional`);
-  }
-
-  if (new RegExp(expressions.return).test(line)) {
-    console.log(`Line ${currentLine} - Retorno`);
-  }
-
-  if (new RegExp(expressions.write).test(line)) {
-    console.log(`Line ${currentLine} - Escrita de dados`);
-  }
-
-  // if (new RegExp(expressions.functionCall).test(line)) {
-  //   console.log(`Line ${currentLine} - Chamada de função`);
-  // }
 }
 
 function getFunctionName(line) {
-  var result = expressions.findFunctionName.exec( line.toString() )
-  return  result  ?  result[ 1 ]  :  ''
+  var exp =  /^function\s+([\w\$]+)\s*\(/;
+  var result = exp.exec( line.toString() );
+  return  result  ?  '"' + result[ 1 ] + '"' :  ''    
 }
