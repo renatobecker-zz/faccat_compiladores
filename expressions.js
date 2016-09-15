@@ -8,7 +8,7 @@ let expressions = {
   forloop: /for +\(([^()]*|\([^()]*\))*\)/g,
   whileloop: /while +\(([^()]*|\([^()]*\))*\)/g,
   conditional: /if +\(([^()]*|\([^()]*\))*\)/g,
-  functionCall: /([a-zA-Z0-9]+)\(([^()]*|\([^()]*\))*\)/g,
+  functionCall: /^(?!function).*([a-zA-Z0-9]+)\(([^()]*|\([^()]*\))*\)/g,
   return: 'return',
   write: 'console.log'
 };
