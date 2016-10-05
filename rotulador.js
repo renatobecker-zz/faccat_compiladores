@@ -5,6 +5,8 @@ let readline = require('readline');
 
 let expressions = require('./expressions');
 let messages = require('./messages');
+let reserved_words = require('./reserved_words');
+let lexical_analysis = require('./lexical_analysis');
 
 let currentLine = 1;
 
@@ -14,21 +16,63 @@ let rd = readline.createInterface({
   terminal: false
 });
 
+let numberPrinted;
+
 rd.on('line', (line) => {
   getLineLabel(line);
   currentLine++;
 });
 
 function getLineLabel(line) {
-
+  /*
   for (var exp in expressions) {
-    var re = new RegExp(expressions[exp]);
-    if (re.test(line)) {
-      var name = (exp === 'function') ? getFunctionName(line) : '';
-      console.log('Line ' + currentLine + ' ' + messages[exp] + name);    
+    if (line.match(expressions[exp])) { 
+      let name = (exp === 'function') ? getFunctionName(line) : '';
+      console.log('Line ' + currentLine);
+      console.log(messages[exp] + name);    
     }  
+  }*/
+  let lexemas = line.match(/("[^"]+"|[^"\s]+)/g);
+  for (var lex in lexemas) { 
+    let lex_str = lexemas[lex].toLowerCase();
+        
+    if ( isReservedWord(lex_str) ) {
+      printLineNumber();
+      console.log(line.trim());
+      console.log(lexemas[lex]);
+      console.log("palavra reservada");        
+    }        
   }
+  for (var analys in lexical_analysis) {
+    verifyLexicalAnalysis(lexical_analysis[analys],line);            
+  }        
+}
 
+function isReservedWord(term) {
+  let index = reserved_words.indexOf(term);
+  return (index > -1);
+}
+
+function verifyLexicalAnalysis(obj, line) {
+  if ((obj.expressions) && (obj.expressions.length > 0)) {
+    for (var i = 0; i< obj.expressions.length; i++) {
+      if (line.match(obj.expressions[i])) {      
+        printLineNumber();
+        console.log(line.trim());
+        console.log(obj.description);         
+        console.log(obj.expressions[i]);
+        return;
+      }
+    }    
+  } 
+}
+
+function printLineNumber(){
+
+  if (numberPrinted !== currentLine){ 
+    console.log('Line ' + currentLine);  
+    numberPrinted = currentLine;
+  }  
 }
 
 function getFunctionName(line) {

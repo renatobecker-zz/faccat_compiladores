@@ -5,13 +5,14 @@ function getType(data) {
 function showUsers(users) {
   for (let i = 0; i < users.length; i++) {
     if (users[i] === 'Fernando') {
-      console.log(`Woahhh, you found it!`);
+      console.log('Woahhh, you found it!');
   	}
   }
 }
 
+//Declarações divesas
 function sum(a, b) {
-  let data = a + b
+  let data = a + b;
   return data;
 }
 
@@ -27,5 +28,6 @@ let type = getType('disciplina de compiladores');
 
 console.log(type);
 
+/*My Comment*/
 showUsers(['Leonardo', 'Renato', 'Fernando', 'Delmar', 'Marcelo']);
 ateParar(40);
