@@ -32,20 +32,20 @@ function getLineLabel(line) {
       console.log(messages[exp] + name);    
     }  
   }*/
+
   let lexemas = line.match(/("[^"]+"|[^"\s]+)/g);
   for (var lex in lexemas) { 
     let lex_str = lexemas[lex].toLowerCase();
         
     if ( isReservedWord(lex_str) ) {
-      printLineNumber();
-      console.log(line.trim());
+      printLine(line);
       console.log(lexemas[lex]);
       console.log("palavra reservada");        
     }        
   }
   for (var analys in lexical_analysis) {
     verifyLexicalAnalysis(lexical_analysis[analys],line);            
-  }        
+  }       
 }
 
 function isReservedWord(term) {
@@ -56,21 +56,25 @@ function isReservedWord(term) {
 function verifyLexicalAnalysis(obj, line) {
   if ((obj.expressions) && (obj.expressions.length > 0)) {
     for (var i = 0; i< obj.expressions.length; i++) {
-      if (line.match(obj.expressions[i])) {      
-        printLineNumber();
-        console.log(line.trim());
-        console.log(obj.description);         
-        console.log(obj.expressions[i]);
+      let result = line.match(obj.expressions[i]);
+      if (result) {
+        printLine(line);
+        if (obj.callback) {
+          obj.callback(result);
+        }
+        if (obj.description) console.log(obj.description);         
+        console.log('Expressão Regular: ' + obj.expressions[i]);
         return;
       }
     }    
   } 
 }
 
-function printLineNumber(){
-
+function printLine(line){
   if (numberPrinted !== currentLine){ 
+    console.log();
     console.log('Line ' + currentLine);  
+    console.log(line.trim());
     numberPrinted = currentLine;
   }  
 }
