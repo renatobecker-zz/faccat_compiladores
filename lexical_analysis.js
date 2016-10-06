@@ -1,5 +1,13 @@
 'use strict';
 
+function print_params(args){
+  for (var i = 0; i< args.length; i++) {
+    let arg_name = args[i].replace(/\W/g,"");        
+    console.log(arg_name);
+    console.log("Parametro");
+  }
+}
+
 let lexical_analysis_expressions = [
   {
     expressions: [/[(]*[a-zA-Z0-9_]+ *([-+*/] *[a-zA-Z0-9_]+ *[)]*)+| *[a-zA-Z0-9_]+[-+]+/g],
@@ -27,6 +35,10 @@ let lexical_analysis_expressions = [
         console.log(args[1].trim());
       }
     }
+  },
+  {
+    expressions: [/^(?!function).*([a-zA-Z0-9]+)\(([^()]*|\([^()]*\))*\)/g],
+    description: "Chamada de Funcao"
   },
   {
     //expressions: [/\(\s*([^)]+?)\s*\)/],
