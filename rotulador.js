@@ -32,25 +32,25 @@ function getLineLabel(line) {
       console.log(messages[exp] + name);    
     }  
   }*/
+  verifyReservedWord(line);
 
-  let lexemas = line.match(/("[^"]+"|[^"\s]+)/g);
-  for (var lex in lexemas) { 
-    let lex_str = lexemas[lex].toLowerCase();
-        
-    if ( isReservedWord(lex_str) ) {
-      printLine(line);
-      console.log(lexemas[lex]);
-      console.log("palavra reservada");        
-    }        
-  }
   for (var analys in lexical_analysis) {
     verifyLexicalAnalysis(lexical_analysis[analys],line);            
   }       
 }
 
-function isReservedWord(term) {
-  let index = reserved_words.indexOf(term);
-  return (index > -1);
+function verifyReservedWord(line) {
+  let re = /\b(do|if|in|for|let|new|try|var|case|else|enum|eval|null|this|true|void|with|await|break|catch|class|const|false|super|throw|while|yield|delete|export|import|public|return|static|switch|typeof|default|extends|finally|package|private|continue|debugger|function|arguments|interface|protected|implements|instanceof)/;
+  let lexemas = line.match(/("[^"]+"|[^"\s]+)/g);
+  for (var lex in lexemas) { 
+    let lex_str = lexemas[lex].toLowerCase();           
+    if (lex_str.match(re)) {
+      printLine(line);
+      console.log(lexemas[lex]);
+      console.log("Palavra reservada");    
+      console.log('Expressao Regular: ' + re);    
+    }        
+  }
 }
 
 function verifyLexicalAnalysis(obj, line) {
@@ -63,7 +63,7 @@ function verifyLexicalAnalysis(obj, line) {
           obj.callback(result);
         }
         if (obj.description) console.log(obj.description);         
-        console.log('Expressão Regular: ' + obj.expressions[i]);
+        console.log('Expressao Regular: ' + obj.expressions[i]);
         return;
       }
     }    
