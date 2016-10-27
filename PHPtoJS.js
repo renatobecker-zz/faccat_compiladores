@@ -33,16 +33,18 @@ function init_process() {
 		} else {
 			fs.readFile(filename, function(err, data) {
     			if(err) throw err;
-                //let AST = parser.parseEval(data.toString());				
+                let AST = parser.parseEval(data.toString());				
 				//console.log(AST);//.toString());
-				console.log(data.toString());
+				
                 parser.lexer.setInput(["<?php", data.toString()].join("\n"));
 				let token = parser.lexer.lex() || EOF;
 				let names = parser.tokens.values;
-				while(token != EOF) {
-  					console.log(names[token], '(', parser.lexer.yytext, ')');
-  					token = parser.lexer.lex() || EOF;
-  				}		
+				while(token != EOF) {					
+					if (names[token] != 'T_WHITESPACE') {
+  						console.log(parser.lexer.yylineno, ':', names[token], '(', parser.lexer.yytext, ')');
+  					}	
+					token = parser.lexer.lex() || EOF;
+  				}
 			});			
 		}		
 	}
