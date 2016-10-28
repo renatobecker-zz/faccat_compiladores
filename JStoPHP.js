@@ -2,15 +2,15 @@
 
 let esprima = require('esprima');
 let fs = require('fs');
-let reservedWords = require('./reserved_words');
+let parser = require('./lib/parser.js');
 
-const stdoutTokens = ["Numeric", "String"];
+//const stdoutTokens = ["Numeric", "String"];
 
-let output = '<?php\n';
+//let output = '<?php\n';
 
 fs.readFile('fileToRead.js', 'utf8', (err, data) => {
   if (err) return err;
-
+  /*
   let tokens = esprima.tokenize(data);
   let previousToken;
 
@@ -63,6 +63,12 @@ fs.readFile('fileToRead.js', 'utf8', (err, data) => {
       output += token.value;
     }
   }
-
+  
   console.log(output);
+  */  
+  let parseResult = esprima.parse(data);  
+  let parserObj = new parser(parseResult, 'output/script.php');
+  //parserObj.printTree(); 
+  parserObj.saveFile();
+  parserObj.create(); 
 });
