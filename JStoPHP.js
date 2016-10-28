@@ -69,6 +69,7 @@ fs.readFile('fileToRead.js', 'utf8', (err, data) => {
   let parseResult = esprima.parse(data);  
   let parserObj = new parser(parseResult, 'output/script.php');
   //parserObj.printTree(); 
-  parserObj.saveFile();
+  parserObj.saveFileLog();
   parserObj.create(); 
 });
+

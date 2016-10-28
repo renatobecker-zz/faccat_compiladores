@@ -21,3 +21,7 @@ var total = 4;
 while (total > 0) {
   total--;
 }
+
+function calcular(val1, val2) {
+	return val1 * val2;
+}
