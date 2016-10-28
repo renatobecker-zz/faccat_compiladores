@@ -1,3 +1,5 @@
+var name = "Faccat Compiladores";
+
 function teste() {
   var x = 1;
   alert(x);
@@ -6,3 +8,7 @@ function teste() {
 teste();
 
 alert('teste');
+
+for (i = 0; i < 5; i++) {
+    console.log("The number is " + i);
+}

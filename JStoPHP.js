@@ -4,6 +4,8 @@ let esprima = require('esprima');
 let fs = require('fs');
 let reservedWords = require('./reserved_words');
 
+const stdoutTokens = ["Numeric", "String"];
+
 let output = '<?php\n';
 
 fs.readFile('fileToRead.js', 'utf8', (err, data) => {
@@ -57,10 +59,9 @@ fs.readFile('fileToRead.js', 'utf8', (err, data) => {
       output += `${token.value}`;
     }
 
-    if (token.type === 'Numeric') {
+    if (stdoutTokens.indexOf(token.type) > -1) {
       output += token.value;
     }
-
   }
 
   console.log(output);
