@@ -3,9 +3,10 @@
 let fs = require('fs');
 let readline = require('readline');
 let parser = require('php-parser');
+let escodegen = require('escodegen');
 let EOF = parser.lexer.EOF;
-parser.lexer.mode_eval = false;
-parser.lexer.all_tokens = true;
+// parser.lexer.mode_eval = false;
+// parser.lexer.all_tokens = true;
 
 function isValidFileExtension(filename) {
 	let check_name = filename.toLowerCase();
@@ -13,7 +14,7 @@ function isValidFileExtension(filename) {
 }
 
 function validateArgs() {
-	let args = process.argv.slice(2);	
+	let args = process.argv.slice(2);
 	return (args.length > 0);
 }
 
@@ -21,8 +22,8 @@ function init_process() {
 	let isValidArgs = validateArgs();
 	if (isValidArgs == false) {
 		console.log('Nenhum arquivo PHP informado.');
-		return;	
-	} 
+		return;
+	}
 
 	let args = process.argv.slice(2);
 	for (let i = 0; i < args.length; i++) {
@@ -32,21 +33,35 @@ function init_process() {
 			console.log("Invalid file extension: " + filename);
 		} else {
 			fs.readFile(filename, function(err, data) {
-    			if(err) throw err;
-                let AST = parser.parseEval(data.toString());				
+    		if(err) throw err;
+
+				let AST = parser.parseEval(data.toString());
 				//console.log(AST);//.toString());
-				
-                parser.lexer.setInput(["<?php", data.toString()].join("\n"));
+
+				console.log(AST[1][0]);
+        // console.log(escodegen.generate(AST));
+        return;
+
+
+				// for (let i = 0; i < AST[1].length; i++) {
+				// 	let self = AST[1][i];
+				// 	console.log('self', self);
+				// }
+				// return;
+
+        parser.lexer.setInput(["<?php", data.toString()].join("\n"));
+
 				let token = parser.lexer.lex() || EOF;
 				let names = parser.tokens.values;
-				while(token != EOF) {					
+
+				while(token != EOF) {
 					if (names[token] != 'T_WHITESPACE') {
   						console.log(parser.lexer.yylineno, ':', names[token], '(', parser.lexer.yytext, ')');
-  					}	
+  					}
 					token = parser.lexer.lex() || EOF;
   				}
-			});			
-		}		
+			});
+		}
 	}
 }
 init_process();
