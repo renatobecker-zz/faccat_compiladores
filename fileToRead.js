@@ -9,7 +9,6 @@ function teste() {
 }
 
 teste();
-
 alert('teste');
 
 let oper;
@@ -28,3 +27,5 @@ while (total > 0) {
 function calcular(val1, val2) {
 	return val1 * val2;
 }
+
+calcular(2,4);
