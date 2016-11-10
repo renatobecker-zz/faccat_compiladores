@@ -1,4 +1,4 @@
-var name  = "Faccat Compiladores";
+var appName  = "Faccat Compiladores";
 var print = "print source code";
 
 function teste() {
@@ -6,6 +6,7 @@ function teste() {
   alert(x);
   alert("alert string");
   alert("teste" + " concatenação");
+  alert(appName);
 }
 
 teste();
@@ -16,6 +17,8 @@ var calc = 1 + 3 * 22 / 4;
 let ok = "print ok";
 
 for (i = 0; i < 5; i++) {
+	//comentário no FOR
+	if ((i === 2) || (i === 4)) break; 
     console.log("The number is " + i);
 }
 
@@ -25,7 +28,11 @@ while (total > 0) {
 }
 
 function calcular(val1, val2) {
-	return val1 * val2;
+	return val1 * val2 + 6;
 }
 
 calcular(2,4);
+
+function notToDo() {
+	return;
+}
