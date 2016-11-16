@@ -1,12 +1,12 @@
 var appName  = "Faccat Compiladores";
 var print = "print source code";
+var output = "testando " + "declaração";
 
 function teste() {
   var x = 1;
   alert(x);
   alert("alert string");
   alert("teste" + " concatenação");
-  alert(appName);
 }
 
 teste();
