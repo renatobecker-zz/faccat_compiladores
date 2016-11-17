@@ -16,6 +16,14 @@ let oper;
 var calc = 1 + 3 * 22 / 4;
 let ok = "print ok";
 
+if ((calc > 10)) {
+	alert("Maior que 10!");
+} else {
+  alert("Ainda não :(");
+}
+
+if (1 == 1) alert("Óbvio!");
+
 for (i = 0; i < 5; i++) {
 	//comentário no FOR
 	if ((i === 2) || (i === 4)) break; 
