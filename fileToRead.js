@@ -12,7 +12,7 @@ function teste() {
 teste();
 alert('teste');
 
-let oper;
+et oper;
 var calc = 1 + 3 * 22 / 4;
 let ok = "print ok";
 
