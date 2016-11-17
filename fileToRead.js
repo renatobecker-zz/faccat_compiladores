@@ -12,7 +12,7 @@ function teste() {
 teste();
 alert('teste');
 
-et oper;
+let oper;
 var calc = 1 + 3 * 22 / 4;
 let ok = "print ok";
 
@@ -26,7 +26,7 @@ if (1 == 1) alert("Óbvio!");
 
 for (i = 0; i < 5; i++) {
 	//comentário no FOR
-	if ((i === 2) || (i === 4)) break; 
+	if ((i === 2) || (i === 4)) break;
     console.log("The number is " + i);
 }
 
